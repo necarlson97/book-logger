@@ -7,16 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042C48C321753D50003F2C42 /* PageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C48C221753D50003F2C42 /* PageController.swift */; };
+		042C48C52175405C003F2C42 /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C48C42175405C003F2C42 /* PagesController.swift */; };
+		042C48C7217540F5003F2C42 /* BooksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C48C6217540F5003F2C42 /* BooksController.swift */; };
 		04E852FC2161BC6D00F8C439 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E852FB2161BC6D00F8C439 /* AppDelegate.swift */; };
 		04E852FE2161BC6D00F8C439 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E852FD2161BC6D00F8C439 /* ViewController.swift */; };
 		04E853012161BC6E00F8C439 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E852FF2161BC6E00F8C439 /* Main.storyboard */; };
 		04E853032161BC6F00F8C439 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E853022161BC6F00F8C439 /* Assets.xcassets */; };
 		04E853062161BC6F00F8C439 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E853042161BC6F00F8C439 /* LaunchScreen.storyboard */; };
 		04E8530E2161C8CB00F8C439 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */; };
-		04E853102162578A00F8C439 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8530F2162578A00F8C439 /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042C48C221753D50003F2C42 /* PageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageController.swift; sourceTree = "<group>"; };
+		042C48C42175405C003F2C42 /* PagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
+		042C48C6217540F5003F2C42 /* BooksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksController.swift; sourceTree = "<group>"; };
 		04E852F82161BC6D00F8C439 /* Book Logger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Logger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E852FB2161BC6D00F8C439 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04E852FD2161BC6D00F8C439 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +30,6 @@
 		04E853052161BC6F00F8C439 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04E853072161BC6F00F8C439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		04E8530F2162578A00F8C439 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +69,9 @@
 				04E853042161BC6F00F8C439 /* LaunchScreen.storyboard */,
 				04E853072161BC6F00F8C439 /* Info.plist */,
 				04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */,
-				04E8530F2162578A00F8C439 /* PhotoView.swift */,
+				042C48C221753D50003F2C42 /* PageController.swift */,
+				042C48C42175405C003F2C42 /* PagesController.swift */,
+				042C48C6217540F5003F2C42 /* BooksController.swift */,
 			);
 			path = "Book Logger";
 			sourceTree = "<group>";
@@ -143,8 +149,10 @@
 			files = (
 				04E8530E2161C8CB00F8C439 /* CollectionViewController.swift in Sources */,
 				04E852FE2161BC6D00F8C439 /* ViewController.swift in Sources */,
+				042C48C52175405C003F2C42 /* PagesController.swift in Sources */,
 				04E852FC2161BC6D00F8C439 /* AppDelegate.swift in Sources */,
-				04E853102162578A00F8C439 /* PhotoView.swift in Sources */,
+				042C48C7217540F5003F2C42 /* BooksController.swift in Sources */,
+				042C48C321753D50003F2C42 /* PageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
