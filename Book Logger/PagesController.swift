@@ -3,34 +3,46 @@ import UIKit
 
 class PagesController: CollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var currentImage = UIImage(named: "no-image")
+    var pages:[(UIImage, String)]!
+    let imagePicker = UIImagePickerController()
+    
     override func viewDidLoad() {
-
+        imagePicker.delegate = self
+        pages = []
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookCell", for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pageCell", for: indexPath) as! PageCell
         
         // Configure the cell
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.lightGray.cgColor
         
-        // Use this to load the image page
-        print(indexPath)
+        if indexPath.row < pages.count {
+            // load image from current pages
+            cell.imageView.image = pages[indexPath.row].0
+        } else {
+            // this cell is for a new page
+        }
         
         return cell
     }
-
+    
     @IBAction func newPage(_ sender: Any) {
-//        openCameraButton()
-        self.performSegue(withIdentifier: "toPage", sender: nil)
+        openCameraButton()
     }
     
-    @IBOutlet weak var currentImage: UIImage!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPage" {
+            let destination = segue.destination as! PageController
+            destination.pageImage = currentImage
+        }
+    }
     
     @IBAction func openCameraButton() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
             imagePicker.sourceType = .camera;
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
@@ -42,8 +54,6 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     
     @IBAction func openPhotoLibraryButton() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary;
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
@@ -59,18 +69,17 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
          instead of `UIImagePickerControllerEditedImage`
          */
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            self.currentImage = editedImage
+            currentImage = editedImage
         }
         
-        // Segue to page
-        self.performSegue(withIdentifier: "toPage", sender: nil)
         // Dismiss the UIImagePicker after selection
-        self.dismiss(animated: true)
+        self.dismiss(animated: true) {
+            self.performSegue(withIdentifier: "toPage", sender: nil)
+        }
         
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //        picker.isNavigationBarHidden = false
         self.dismiss(animated: true)
     }
     
