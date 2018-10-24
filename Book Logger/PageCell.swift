@@ -11,4 +11,9 @@ import UIKit
 class PageCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    func viewDidLoad() {
+        
+    }
+
 }

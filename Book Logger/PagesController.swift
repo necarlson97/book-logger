@@ -6,19 +6,26 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     var currentImage = UIImage(named: "no-image")
     var pages:[(UIImage, String)]!
     let imagePicker = UIImagePickerController()
+    var bookDir:NSURL!
     
     override func viewDidLoad() {
         imagePicker.delegate = self
         pages = []
+        
+        
+
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return pages.count + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pageCell", for: indexPath) as! PageCell
         
-        // Configure the cell
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.imageView.layer.borderWidth = 1
+        cell.imageView.layer.borderColor = UIColor.lightGray.cgColor
         
         if indexPath.row < pages.count {
             // load image from current pages
@@ -36,6 +43,8 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toPage" {
+            // If we are headed to a new page,
+            // create that page with the proper image (and transcript)
             let destination = segue.destination as! PageController
             destination.pageImage = currentImage
         }
@@ -74,6 +83,8 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         
         // Dismiss the UIImagePicker after selection
         self.dismiss(animated: true) {
+            // Segue to new page after image capture
+            self.saveImage(image: self.currentImage!)
             self.performSegue(withIdentifier: "toPage", sender: nil)
         }
         
@@ -84,24 +95,31 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     }
     
     func saveImage(image: UIImage) {
-        // get the documents directory url
-        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        // choose a name for your image
-        let fileName = "image.jpg"
-        // create the destination file url to save your image
-        let fileURL = documentsDirectory.appendingPathComponent(fileName)
-        // get your UIImage jpeg data representation and check if the destination file url already exists
-        let data = image.jpegData(compressionQuality: 1.0)
-        if data != nil && !FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                // writes the image data to disk
-                try data?.write(to: fileURL)
-                print("file saved")
-            } catch {
-                print("error saving file:", error)
-            }
+        // create new directiory for image / transcript
+        let pageDir = bookDir.appendingPathComponent("page")
+        do {
+            try FileManager.default.createDirectory(atPath: (pageDir?.path)!, withIntermediateDirectories: true, attributes: nil)
         }
-    }
+        catch let error as NSError {
+            NSLog("Unable to create page directory \(error.debugDescription)")
+        }
+        
+        // new image file
+        let imgData = image.pngData()
+        let imgName = "page.png"
+        let imgURL = pageDir?.appendingPathComponent(imgName)
+        // new txt file
+        let txtData = "I'm a transcript!"
+        let txtName = "page.txt"
+        let txtURL = pageDir?.appendingPathComponent(txtName)
+        // write data to page directory
+        do {
+            try imgData?.write(to: imgURL!)
+            try txtData.write(to: txtURL!, atomically: false, encoding: .utf8)
+        } catch {
+            print("error saving file:", error)
+        }
     
+    }    
     
 }

@@ -19,9 +19,18 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let w = (collectionView.bounds.size.width/2) - 10
-        let h = w * 1.5
+        let w = (collectionView.bounds.size.width/2)
+        let ratio = collectionView.bounds.size.height / collectionView.bounds.size.width
+        let h = w * ratio
         return CGSize(width: w, height: h);
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 
 }
