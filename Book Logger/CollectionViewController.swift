@@ -2,6 +2,46 @@
 
 import UIKit
 
+class PageData {
+    // Data storage object for a single page
+    
+    // camera / photo library image
+    var img: UIImage!
+    // ocr transcript for image
+    var txt: String!
+    // directory this page is saved to
+    var dir: URL!
+    
+    init(dir: URL, img: UIImage?, txt: String?) {
+        // If data was improperly set / cannot be found, use error indicators
+        self.img = img
+        if img == nil {
+            self.img = UIImage(named: "no-image")!
+        }
+        self.txt = txt
+        if txt == nil {
+            self.txt = "ERROR: image transcript not loded"
+        }
+    }
+    
+
+}
+
+class BookData {
+    // Data storage object for a book
+    
+    // array of pages that form the book
+    var pages:[PageData]!
+    // directory this book is saved to
+    var dir: URL!
+    
+    init(dir: URL, pages:[PageData]) {
+        self.dir = dir
+        self.pages = pages
+    }
+}
+
+
 class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {

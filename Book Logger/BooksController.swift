@@ -1,50 +1,46 @@
 import UIKit
 
-
 class BooksController: CollectionViewController {
     
-    var books:[[(UIImage, String)]]!
+    var books:[BookData]!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     override func viewDidLoad() {
-        books = getBooks()
+       books = getBooks()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return books.count + 1
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toPages" {
-            // If we are headed to a new book,
-            // create a new directory for it
-            let destination = segue.destination as! PagesController
-            let bookDir = docDir.appendingPathComponent("book")
-            do {
-                try FileManager.default.createDirectory(atPath: (bookDir.path), withIntermediateDirectories: true, attributes: nil)
-            }
-            catch let error as NSError {
-                NSLog("Unable to create book directory \(error.debugDescription)")
-            }
-            destination.bookDir = bookDir as NSURL
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookCell", for: indexPath) as! BookCell
         
         if indexPath.row < books.count {
+            // No '+' on the button
+            cell.plusLabel.text = ""
+            
             // load image from current books
             let book = books[indexPath.row]
 
             // Set front image to first page
-            cell.bookImageView.image = book[0].0
+            if book.pages.count > 0 {
+                cell.bookImageView.image = book.pages[0].img
+            } else {
+                cell.bookImageView.image = nil
+            }
             
             // if there are more images, set back image to second page
-            if book.count > 1 {
-                cell.bgImageView.image = book[1].0
-
+            if book.pages.count > 1 {
+                cell.bgImageView.image = book.pages[1].img
+            } else {
+                cell.bgImageView.image = nil
             }
         } else {
             // this cell is for a new book
@@ -58,31 +54,73 @@ class BooksController: CollectionViewController {
         return cell
     }
     
-    func newBook() {
-        
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row < books.count {
+            // go to existing book
+            let book = books[indexPath.row]
+            sequeToBook(book: book)
+        } else {
+            // create new book, then segue there
+            sequeToNewBook()
+        }
     }
     
-    func getBooks() -> [[(UIImage, String)]] {
-        var loadBooks:[[(UIImage, String)]] = []
+    func sequeToNewBook() {
+        // create new book directory
+        let unixTime = NSDate().timeIntervalSince1970
+        let bookDir = docDir.appendingPathComponent("book\(unixTime)")
+        do {
+            try FileManager.default.createDirectory(atPath: (bookDir.path), withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            NSLog("Unable to create book directory \(error.debugDescription)")
+        }
+        
+        let book = BookData(dir: bookDir, pages:[])
+        books.append(book)
+        performSegue(withIdentifier: "toPages", sender: book)
+    }
+    
+    func sequeToBook(book: BookData) {
+        performSegue(withIdentifier: "toPages", sender: book)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Before we move to a PagesViewController, set the correct BookData (using sender)
+        if segue.identifier == "toPages" {
+            let pagesVC = segue.destination as! PagesController
+            let book = sender as! BookData
+            pagesVC.book = book
+        }
+    }
+    
+    func getBooks() -> [BookData] {
+        var loadBooks:[BookData] = []
         
         do {
             // Get all book folders, iterate through
-            let bookDirs = try FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil)
+            let bookDirs = try FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
             for bookDir in bookDirs {
-                var pages:[(UIImage, String)] = []
+                // create a new book with empty pages
+                let book:BookData = BookData(dir: bookDir, pages: [])
                 // get all page folders, iterate through
-                let pageDirs = try FileManager.default.contentsOfDirectory(at: bookDir, includingPropertiesForKeys: nil)
+                let pageDirs = try FileManager.default.contentsOfDirectory(at: bookDir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
                 for pageDir in pageDirs {
                     // get page image and page transcript text
+                    
+                    // load image from file
                     let imagePath = pageDir.appendingPathComponent("page.png")
-                    let img = UIImage(contentsOfFile: imagePath.absoluteString)
+                    let imageData = NSData(contentsOf: imagePath)!
+                    let img = UIImage(data: imageData as Data)
+                    // Load text from file
                     let txtPath = pageDir.appendingPathComponent("page.txt")
                     let txt = try String(contentsOf: txtPath, encoding: .utf8)
+                    
                     // Add new page to pages
-                    pages.append((img!, txt))
+                    let page = PageData(dir: pageDir, img: img, txt: txt)
+                    book.pages.append(page)
                 }
                 // Add new book to books
-                loadBooks.append(pages)
+                loadBooks.append(book)
             }
         } catch let error{
             print("error getting books: ", error)

@@ -22,7 +22,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <segue destination="C5X-lE-D3o" kind="show" id="p1K-xC-XJW"/>
+                                    <action selector="backToBooks:" destination="q3Q-pe-ZCX" eventType="touchUpInside" id="9Bx-We-6Yw"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgC-s5-pDP">
@@ -54,31 +54,29 @@
                                             <rect key="frame" x="0.0" y="0.0" width="135" height="193"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1F-xg-SWb">
-                                                    <rect key="frame" x="10" y="10" width="115" height="173"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                    <state key="normal" title="+"/>
-                                                    <connections>
-                                                        <action selector="newPage:" destination="q3Q-pe-ZCX" eventType="touchUpInside" id="iep-hu-lCX"/>
-                                                    </connections>
-                                                </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NZ1-lP-2rT">
                                                     <rect key="frame" x="10" y="10" width="115" height="173"/>
+                                                    <color key="backgroundColor" red="0.95628238340000005" green="0.95628238340000005" blue="0.95628238340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2S-S4-8A9">
+                                                    <rect key="frame" x="52" y="66.5" width="31" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                    <color key="textColor" red="0.070588235289999995" green="0.41568627450000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="y1F-xg-SWb" secondAttribute="bottom" constant="10" id="1wQ-OZ-Pcq"/>
                                             <constraint firstAttribute="bottom" secondItem="NZ1-lP-2rT" secondAttribute="bottom" constant="10" id="Aty-d2-NPU"/>
-                                            <constraint firstItem="y1F-xg-SWb" firstAttribute="leading" secondItem="KKb-E4-dpA" secondAttribute="leading" constant="10" id="KRP-Gc-bAU"/>
+                                            <constraint firstItem="J2S-S4-8A9" firstAttribute="centerY" secondItem="KKb-E4-dpA" secondAttribute="centerY" id="Hve-bZ-I97"/>
+                                            <constraint firstItem="J2S-S4-8A9" firstAttribute="centerX" secondItem="KKb-E4-dpA" secondAttribute="centerX" id="MEh-y3-knJ"/>
                                             <constraint firstItem="NZ1-lP-2rT" firstAttribute="leading" secondItem="KKb-E4-dpA" secondAttribute="leading" constant="10" id="MPh-aK-aZy"/>
-                                            <constraint firstItem="y1F-xg-SWb" firstAttribute="top" secondItem="KKb-E4-dpA" secondAttribute="top" constant="10" id="SzG-X0-c5f"/>
-                                            <constraint firstAttribute="trailing" secondItem="y1F-xg-SWb" secondAttribute="trailing" constant="10" id="dMd-r7-FBS"/>
                                             <constraint firstItem="NZ1-lP-2rT" firstAttribute="top" secondItem="KKb-E4-dpA" secondAttribute="top" constant="10" id="kgE-AQ-Wc9"/>
                                             <constraint firstAttribute="trailing" secondItem="NZ1-lP-2rT" secondAttribute="trailing" constant="10" id="q7X-dZ-PgH"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="NZ1-lP-2rT" id="Rbs-di-9Gp"/>
+                                            <outlet property="plusLabel" destination="J2S-S4-8A9" id="EMB-tI-Ugz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -106,6 +104,7 @@
                     </view>
                     <size key="freeformSize" width="343" height="600"/>
                     <connections>
+                        <outlet property="collectionView" destination="kcb-ah-72a" id="ezE-40-UXH"/>
                         <segue destination="nAh-gS-HXs" kind="show" identifier="toPage" id="brr-Ug-hMn"/>
                     </connections>
                 </viewController>
@@ -130,7 +129,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FBF-Lv-ql5">
                                 <rect key="frame" x="16" y="64" width="343" height="253.5"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Scanning image now..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iQT-bR-9JR">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Error loading transcript..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iQT-bR-9JR">
                                 <rect key="frame" x="16" y="369" width="343" height="278"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -141,7 +140,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <segue destination="q3Q-pe-ZCX" kind="show" id="Ios-nK-rUS"/>
+                                    <action selector="backToPages:" destination="nAh-gS-HXs" eventType="touchUpInside" id="oSs-tg-Jch"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transcript" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4g-xn-IH3">
@@ -174,6 +173,7 @@
                     </view>
                     <connections>
                         <outlet property="pageImageView" destination="FBF-Lv-ql5" id="edJ-cq-uU1"/>
+                        <outlet property="transcriptView" destination="iQT-bR-9JR" id="cYS-46-hOp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoH-oo-TkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,40 +217,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="193"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-Cm-aOu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-Cm-aOu">
                                                     <rect key="frame" x="20" y="20" width="111" height="168"/>
+                                                    <color key="backgroundColor" red="0.84281897668393779" green="0.84281897668393779" blue="0.84281897668393779" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Euq-Jq-dkJ">
                                                     <rect key="frame" x="5" y="5" width="111" height="168"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.97366823186528495" green="0.97366823186528495" blue="0.97366823186528495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjY-ha-7Kx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ln-G9-wAm">
                                                     <rect key="frame" x="5" y="5" width="111" height="168"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                    <state key="normal" title="+"/>
-                                                    <connections>
-                                                        <segue destination="q3Q-pe-ZCX" kind="show" identifier="toPages" id="kAw-0p-aC9"/>
-                                                    </connections>
-                                                </button>
+                                                    <color key="textColor" red="0.070588235294117646" green="0.41568627450980394" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="8Ln-G9-wAm" secondAttribute="bottom" constant="20" id="383-Mv-cbH"/>
                                             <constraint firstItem="Euq-Jq-dkJ" firstAttribute="top" secondItem="gND-5R-5xI" secondAttribute="top" constant="5" id="3dp-Jq-Bh6"/>
-                                            <constraint firstAttribute="bottom" secondItem="cjY-ha-7Kx" secondAttribute="bottom" constant="20" id="48Y-3C-PJV"/>
                                             <constraint firstItem="7m4-Cm-aOu" firstAttribute="leading" secondItem="gND-5R-5xI" secondAttribute="leading" constant="20" id="B5z-Lr-yCP"/>
                                             <constraint firstAttribute="trailing" secondItem="Euq-Jq-dkJ" secondAttribute="trailing" constant="20" id="DGB-cJ-STY"/>
                                             <constraint firstAttribute="bottom" secondItem="Euq-Jq-dkJ" secondAttribute="bottom" constant="20" id="KH5-Do-ZXH"/>
                                             <constraint firstAttribute="trailing" secondItem="7m4-Cm-aOu" secondAttribute="trailing" constant="5" id="Kow-cI-nOz"/>
+                                            <constraint firstAttribute="trailing" secondItem="8Ln-G9-wAm" secondAttribute="trailing" constant="20" id="MnM-1b-Dro"/>
                                             <constraint firstItem="7m4-Cm-aOu" firstAttribute="top" secondItem="gND-5R-5xI" secondAttribute="top" constant="20" id="MsO-d1-d0Y"/>
+                                            <constraint firstItem="8Ln-G9-wAm" firstAttribute="leading" secondItem="gND-5R-5xI" secondAttribute="leading" constant="5" id="Oby-cp-j2H"/>
+                                            <constraint firstItem="8Ln-G9-wAm" firstAttribute="top" secondItem="gND-5R-5xI" secondAttribute="top" constant="5" id="Rp8-Fv-qTd"/>
                                             <constraint firstItem="Euq-Jq-dkJ" firstAttribute="leading" secondItem="gND-5R-5xI" secondAttribute="leading" constant="5" id="SCG-3c-BuW"/>
-                                            <constraint firstAttribute="trailing" secondItem="cjY-ha-7Kx" secondAttribute="trailing" constant="20" id="h6V-mC-QwD"/>
-                                            <constraint firstItem="cjY-ha-7Kx" firstAttribute="leading" secondItem="gND-5R-5xI" secondAttribute="leading" constant="5" id="iQD-60-hk3"/>
                                             <constraint firstAttribute="bottom" secondItem="7m4-Cm-aOu" secondAttribute="bottom" constant="5" id="je1-6a-yRv"/>
-                                            <constraint firstItem="cjY-ha-7Kx" firstAttribute="top" secondItem="gND-5R-5xI" secondAttribute="top" constant="5" id="me2-WO-7Ez"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="bgImageView" destination="7m4-Cm-aOu" id="MlH-IA-8Ue"/>
                                             <outlet property="bookImageView" destination="Euq-Jq-dkJ" id="XM8-JT-OYU"/>
+                                            <outlet property="plusLabel" destination="8Ln-G9-wAm" id="mzQ-Jt-cqz"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -274,13 +274,14 @@
                         <viewLayoutGuide key="safeArea" id="1Rm-ol-4dC"/>
                     </view>
                     <size key="freeformSize" width="343" height="600"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ysh-F9-XUb" id="LUv-HQ-sGd"/>
+                        <segue destination="q3Q-pe-ZCX" kind="show" identifier="toPages" id="mSd-fO-AYV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ra6-yR-R7U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-375.19999999999999" y="-666.56671664167925"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="kAw-0p-aC9"/>
-    </inferredMetricsTieBreakers>
 </document>

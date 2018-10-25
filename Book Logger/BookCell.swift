@@ -14,4 +14,6 @@ class BookCell: UICollectionViewCell {
     
     @IBOutlet weak var bgImageView: UIImageView!
     
+    @IBOutlet weak var plusLabel: UILabel!
+    
 }
