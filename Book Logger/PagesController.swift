@@ -87,25 +87,24 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
             print("Do not have access to photo library")
         }
     }
-    
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        /*
-         Get the image from the info dictionary.
-         If no need to edit the photo, use `UIImagePickerControllerOriginalImage`
-         instead of `UIImagePickerControllerEditedImage`
-         */
-        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            currentImage = editedImage
-        }
-        
-        // Dismiss the UIImagePicker after selection
-        self.dismiss(animated: true) {
-            // Segue to new page after image capture
-            let page = self.saveImage(image: self.currentImage!)
-            self.performSegue(withIdentifier: "toPage", sender: page)
-        }
-        
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    /*
+     Get the image from the info dictionary.
+     If no need to edit the photo, use `UIImagePickerControllerOriginalImage`
+     instead of `UIImagePickerControllerEditedImage`
+     */
+    if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+      currentImage = editedImage
     }
+    
+    // Dismiss the UIImagePicker after selection
+    self.dismiss(animated: true) {
+      // Segue to new page after image capture
+      let page = self.saveImage(image: self.currentImage!)
+      self.performSegue(withIdentifier: "toPage", sender: page)
+    }
+  }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
@@ -125,7 +124,7 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         }
         
         // new image file
-        let imgData = image.pngData()
+        let imgData = UIImagePNGRepresentation(image)
         let imgName = "page.png"
         let imgURL = pageDir.appendingPathComponent(imgName)
         // new txt file
