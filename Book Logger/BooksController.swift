@@ -44,6 +44,9 @@ class BooksController: CollectionViewController {
             }
         } else {
             // this cell is for a new book
+            cell.plusLabel.text = "+"
+            cell.bgImageView.image = nil
+            cell.bookImageView.image = nil
         }
         
         cell.bookImageView.layer.borderWidth = 1

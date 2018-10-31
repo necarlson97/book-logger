@@ -35,7 +35,9 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
             // load image from current pages
             cell.imageView.image = book.pages[indexPath.row].img
         } else {
-            // this cell is for a new page
+            // This cell is for 'new page'
+            cell.plusLabel.text = "+"
+            cell.imageView.image = nil
         }
         
         return cell
@@ -53,7 +55,6 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     }
     
     func sequeToPage(page: PageData) {
-        print("going to page \(page)")
         performSegue(withIdentifier: "toPage", sender: page)
     }
     
