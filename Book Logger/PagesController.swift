@@ -89,13 +89,13 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         }
     }
   
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     /*
      Get the image from the info dictionary.
      If no need to edit the photo, use `UIImagePickerControllerOriginalImage`
      instead of `UIImagePickerControllerEditedImage`
      */
-        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
+    if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
       currentImage = editedImage
     }
     
@@ -125,7 +125,7 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         }
         
         // new image file
-        let imgData = image.pngData()
+        let imgData = UIImagePNGRepresentation(image)
         let imgName = "page.png"
         let imgURL = pageDir.appendingPathComponent(imgName)
         // new txt file
