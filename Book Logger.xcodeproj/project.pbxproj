@@ -18,6 +18,11 @@
 		04E853032161BC6F00F8C439 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E853022161BC6F00F8C439 /* Assets.xcassets */; };
 		04E853062161BC6F00F8C439 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E853042161BC6F00F8C439 /* LaunchScreen.storyboard */; };
 		04E8530E2161C8CB00F8C439 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */; };
+		49FF7F99218D4AE900DC4604 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 49FF7F98218D4AE900DC4604 /* tessdata */; };
+		49FF7F9B218D4B7500DC4604 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF7F9A218D4B7500DC4604 /* libstdc++.tbd */; };
+		49FF7F9D218D4B8900DC4604 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF7F9C218D4B8900DC4604 /* CoreImage.framework */; };
+		49FF7F9F218D4B9D00DC4604 /* TesseractOCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF7F9E218D4B9D00DC4604 /* TesseractOCR.framework */; };
+		FF7C2F3B769A25CEC2252DE8 /* Pods_Book_Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F72318FE5F3D6C7BE29F3D5B /* Pods_Book_Logger.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,13 @@
 		04E853052161BC6F00F8C439 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04E853072161BC6F00F8C439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		49FF7F98218D4AE900DC4604 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		49FF7F9A218D4B7500DC4604 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		49FF7F9C218D4B8900DC4604 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		49FF7F9E218D4B9D00DC4604 /* TesseractOCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TesseractOCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D00FBBDA3A049386E989C21 /* Pods-Book Logger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book Logger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Book Logger/Pods-Book Logger.debug.xcconfig"; sourceTree = "<group>"; };
+		9F1388A0296C18064E9BEA03 /* Pods-Book Logger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Book Logger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Book Logger/Pods-Book Logger.release.xcconfig"; sourceTree = "<group>"; };
+		F72318FE5F3D6C7BE29F3D5B /* Pods_Book_Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Book_Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49FF7F9F218D4B9D00DC4604 /* TesseractOCR.framework in Frameworks */,
+				49FF7F9D218D4B8900DC4604 /* CoreImage.framework in Frameworks */,
+				49FF7F9B218D4B7500DC4604 /* libstdc++.tbd in Frameworks */,
+				FF7C2F3B769A25CEC2252DE8 /* Pods_Book_Logger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +68,8 @@
 			children = (
 				04E852FA2161BC6D00F8C439 /* Book Logger */,
 				04E852F92161BC6D00F8C439 /* Products */,
+				9EE620536D3B17E766A5F8FA /* Pods */,
+				E484BCC9DF8E6D507C6E1A08 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +84,7 @@
 		04E852FA2161BC6D00F8C439 /* Book Logger */ = {
 			isa = PBXGroup;
 			children = (
+				49FF7F98218D4AE900DC4604 /* tessdata */,
 				04E852FB2161BC6D00F8C439 /* AppDelegate.swift */,
 				04E852FD2161BC6D00F8C439 /* ViewController.swift */,
 				04E852FF2161BC6E00F8C439 /* Main.storyboard */,
@@ -82,6 +101,26 @@
 			path = "Book Logger";
 			sourceTree = "<group>";
 		};
+		9EE620536D3B17E766A5F8FA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D00FBBDA3A049386E989C21 /* Pods-Book Logger.debug.xcconfig */,
+				9F1388A0296C18064E9BEA03 /* Pods-Book Logger.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E484BCC9DF8E6D507C6E1A08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49FF7F9E218D4B9D00DC4604 /* TesseractOCR.framework */,
+				49FF7F9C218D4B8900DC4604 /* CoreImage.framework */,
+				49FF7F9A218D4B7500DC4604 /* libstdc++.tbd */,
+				F72318FE5F3D6C7BE29F3D5B /* Pods_Book_Logger.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04E8530A2161BC6F00F8C439 /* Build configuration list for PBXNativeTarget "Book Logger" */;
 			buildPhases = (
+				505583C01A8E92DC528A747B /* [CP] Check Pods Manifest.lock */,
 				04E852F42161BC6D00F8C439 /* Sources */,
 				04E852F52161BC6D00F8C439 /* Frameworks */,
 				04E852F62161BC6D00F8C439 /* Resources */,
+				91A70AEB6DF744BF7FA8E4FC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -141,12 +182,52 @@
 			buildActionMask = 2147483647;
 			files = (
 				04E853062161BC6F00F8C439 /* LaunchScreen.storyboard in Resources */,
+				49FF7F99218D4AE900DC4604 /* tessdata in Resources */,
 				04E853032161BC6F00F8C439 /* Assets.xcassets in Resources */,
 				04E853012161BC6E00F8C439 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		505583C01A8E92DC528A747B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Book Logger-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91A70AEB6DF744BF7FA8E4FC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Book Logger/Pods-Book Logger-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TesseractOCR.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Book Logger/Pods-Book Logger-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		04E852F42161BC6D00F8C439 /* Sources */ = {
@@ -304,10 +385,12 @@
 		};
 		04E8530B2161BC6F00F8C439 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D00FBBDA3A049386E989C21 /* Pods-Book Logger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6JY4Y23L4;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Book Logger/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -323,10 +406,12 @@
 		};
 		04E8530C2161BC6F00F8C439 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F1388A0296C18064E9BEA03 /* Pods-Book Logger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y6JY4Y23L4;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "Book Logger/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
