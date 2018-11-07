@@ -1,5 +1,5 @@
 import UIKit
-
+import TesseractOCR
 
 class PagesController: CollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -67,6 +67,18 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
             destination.page = page
         }
     }
+    // Tesseract Image Recognition
+    func performImageRecognition(_ image: UIImage) -> String {
+      if let tesseract = G8Tesseract(language: "eng") {
+        tesseract.engineMode = .tesseractCubeCombined // Run Tesseract and Cube for best accuracy
+        tesseract.pageSegmentationMode = .auto // Have Tesseract automatically recognize paragraph breaks
+        tesseract.image = image.g8_blackAndWhite() // Preprocessing step
+        tesseract.recognize() // run image recognition
+        return tesseract.recognizedText
+      }
+      let errorMessage = "Could not initiate image recongiton."
+      return errorMessage
+    }
     
     @IBAction func openCameraButton() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -102,7 +114,12 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     // Dismiss the UIImagePicker after selection
     self.dismiss(animated: true) {
       // Segue to new page after image capture
-      let page = self.saveImage(image: self.currentImage!)
+      
+      // Scale image for OCR
+      let scaledImage = self.currentImage!.scaleImage(640)!
+      // Perform OCR and retrieve the recognized text
+      let OCRText = self.performImageRecognition(scaledImage)
+      let page = self.saveImage(image: self.currentImage!, imageText: OCRText)
       self.performSegue(withIdentifier: "toPage", sender: page)
     }
   }
@@ -111,7 +128,7 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         self.dismiss(animated: true)
     }
     
-    func saveImage(image: UIImage) -> PageData {
+  func saveImage(image: UIImage, imageText: String = "I'm a transcript!") -> PageData {
         // create new directiory for image / transcript
         
         // The directory is "page" + unix time stamp
@@ -129,7 +146,7 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         let imgName = "page.png"
         let imgURL = pageDir.appendingPathComponent(imgName)
         // new txt file
-        let txtData = "I'm a transcript!"
+        let txtData = imageText
         let txtName = "page.txt"
         let txtURL = pageDir.appendingPathComponent(txtName)
         // write data to page directory
@@ -150,4 +167,26 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     @IBAction func backToBooks(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+}
+
+// MARK: - UIImage extension
+extension UIImage {
+  func scaleImage(_ maxDimension: CGFloat) -> UIImage? {
+    var scaledSize = CGSize(width: maxDimension, height: maxDimension)
+    
+    if size.width > size.height {
+      let scaleFactor = size.height / size.width
+      scaledSize.height = scaledSize.width * scaleFactor
+    }
+    else {
+      let scaleFactor = size.width / size.height
+      scaledSize.width = scaledSize.height * scaleFactor
+    }
+    
+    UIGraphicsBeginImageContext(scaledSize)
+    draw(in: CGRect(origin: .zero, size: scaledSize))
+    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return scaledImage
+  }
 }
