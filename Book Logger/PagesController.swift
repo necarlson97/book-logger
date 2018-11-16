@@ -1,8 +1,7 @@
 import UIKit
-import TesseractOCR
 
 class PagesController: CollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     var currentImage = UIImage(named: "no-image")
     let imagePicker = UIImagePickerController()
@@ -28,12 +27,13 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         cell.imageView.layer.borderWidth = 1
         cell.imageView.layer.borderColor = UIColor.lightGray.cgColor
         
-        if indexPath.row < book.pages.count {
+        // Index 0 is used for 'new page'
+        if indexPath.row > 0 {
             // No '+' on the button
             cell.plusLabel.text = ""
             
             // load image from current pages
-            cell.imageView.image = book.pages[indexPath.row].img
+            cell.imageView.image = book.pages[indexPath.row-1].img
         } else {
             // This cell is for 'new page'
             cell.plusLabel.text = "+"
@@ -44,9 +44,10 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < book.pages.count {
+        // Index 0 is used for 'new page'
+        if indexPath.row > 0 {
             // go to existing page
-            let page = book.pages[indexPath.row]
+            let page = book.pages[indexPath.row-1]
             sequeToPage(page: page)
         } else {
             // get image, create new page, then segue there
@@ -66,18 +67,6 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
             let page = sender as! PageData
             destination.page = page
         }
-    }
-    // Tesseract Image Recognition
-    func performImageRecognition(_ image: UIImage) -> String {
-      if let tesseract = G8Tesseract(language: "eng") {
-        tesseract.engineMode = .tesseractCubeCombined // Run Tesseract and Cube for best accuracy
-        tesseract.pageSegmentationMode = .auto // Have Tesseract automatically recognize paragraph breaks
-        tesseract.image = image.g8_blackAndWhite() // Preprocessing step
-        tesseract.recognize() // run image recognition
-        return tesseract.recognizedText
-      }
-      let errorMessage = "Could not initiate image recongiton."
-      return errorMessage
     }
     
     @IBAction func openCameraButton() {
@@ -100,35 +89,30 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
             print("Do not have access to photo library")
         }
     }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    /*
-     Get the image from the info dictionary.
-     If no need to edit the photo, use `UIImagePickerControllerOriginalImage`
-     instead of `UIImagePickerControllerEditedImage`
-     */
-    if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
-      currentImage = editedImage
-    }
     
-    // Dismiss the UIImagePicker after selection
-    self.dismiss(animated: true) {
-      // Segue to new page after image capture
-      
-      // Scale image for OCR
-      let scaledImage = self.currentImage!.scaleImage(640)!
-      // Perform OCR and retrieve the recognized text
-      let OCRText = self.performImageRecognition(scaledImage)
-      let page = self.saveImage(image: self.currentImage!, imageText: OCRText)
-      self.performSegue(withIdentifier: "toPage", sender: page)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        /*
+         Get the image from the info dictionary.
+         If no need to edit the photo, use `UIImagePickerControllerOriginalImage`
+         instead of `UIImagePickerControllerEditedImage`
+         */
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage{
+            currentImage = editedImage
+        }
+        
+        // Dismiss the UIImagePicker after selection
+        self.dismiss(animated: true) {
+            // Segue to new page after image capture
+            let page = self.saveImage(image: self.currentImage!)
+            self.performSegue(withIdentifier: "toPage", sender: page)
+        }
     }
-  }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
     }
     
-  func saveImage(image: UIImage, imageText: String = "I'm a transcript!") -> PageData {
+    func saveImage(image: UIImage, imageText: String = "Reading page...") -> PageData {
         // create new directiory for image / transcript
         
         // The directory is "page" + unix time stamp
@@ -160,7 +144,6 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         // create page to pass along to new PageViewController
         let page = PageData(dir: pageDir, img: image, txt: txtData)
         book.pages.append(page)
-        
         return page
     }    
     
@@ -171,22 +154,22 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
 
 // MARK: - UIImage extension
 extension UIImage {
-  func scaleImage(_ maxDimension: CGFloat) -> UIImage? {
-    var scaledSize = CGSize(width: maxDimension, height: maxDimension)
-    
-    if size.width > size.height {
-      let scaleFactor = size.height / size.width
-      scaledSize.height = scaledSize.width * scaleFactor
+    func scaleImage(_ maxDimension: CGFloat) -> UIImage? {
+        var scaledSize = CGSize(width: maxDimension, height: maxDimension)
+        
+        if size.width > size.height {
+            let scaleFactor = size.height / size.width
+            scaledSize.height = scaledSize.width * scaleFactor
+        }
+        else {
+            let scaleFactor = size.width / size.height
+            scaledSize.width = scaledSize.height * scaleFactor
+        }
+        
+        UIGraphicsBeginImageContext(scaledSize)
+        draw(in: CGRect(origin: .zero, size: scaledSize))
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage
     }
-    else {
-      let scaleFactor = size.width / size.height
-      scaledSize.width = scaledSize.height * scaleFactor
-    }
-    
-    UIGraphicsBeginImageContext(scaledSize)
-    draw(in: CGRect(origin: .zero, size: scaledSize))
-    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return scaledImage
-  }
 }
