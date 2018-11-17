@@ -60,8 +60,10 @@ class PageController: UIViewController {
             tesseract.recognize() // run image recognition
             return tesseract.recognizedText
         }
-        let errorMessage = "Could not initiate image recongiton."
-        return errorMessage
+        else {
+          let errorMessage = "Could not initiate image recognition."
+          return errorMessage
+        }
     }
     
 }
