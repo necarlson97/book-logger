@@ -22,12 +22,13 @@ class BooksController: CollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookCell", for: indexPath) as! BookCell
         
-        if indexPath.row < books.count {
+        // Index 0 is used for 'new book'
+        if indexPath.row > 0 {
             // No '+' on the button
             cell.plusLabel.text = ""
             
             // load image from current books
-            let book = books[indexPath.row]
+            let book = books[indexPath.row-1]
 
             // Set front image to first page
             if book.pages.count > 0 {
@@ -58,9 +59,10 @@ class BooksController: CollectionViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < books.count {
+        // Index 0 is used for 'new book'
+        if indexPath.row > 0 {
             // go to existing book
-            let book = books[indexPath.row]
+            let book = books[indexPath.row-1]
             sequeToBook(book: book)
         } else {
             // create new book, then segue there
