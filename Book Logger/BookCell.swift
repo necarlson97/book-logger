@@ -21,9 +21,6 @@ class BookCell: UICollectionViewCell {
     var editController: BooksEditController!
     
     @IBAction func deleteThisCell(_ sender: Any) {
-      print("sender", sender)
-      print("my index", indexPath.row)
-      editController.books.remove(at: indexPath.row)
-      editController.collectionView.deleteItems(at: [indexPath])
+      editController.deleteCell(cell: self)
     }
 }

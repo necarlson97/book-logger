@@ -42,6 +42,55 @@ class BookData {
     }
 }
 
+class LibraryData {
+    // Data storage object for a bunch of books
+    
+    // array of pages that form the book
+    var books:[BookData]!
+    
+    let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    
+    init() {
+        reloadBooks()
+    }
+    
+    func reloadBooks() {
+        var loadBooks:[BookData] = []
+        
+        do {
+            // Get all book folders, iterate through
+            let bookDirs = try FileManager.default.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
+            for bookDir in bookDirs {
+                // create a new book with empty pages
+                let book:BookData = BookData(dir: bookDir, pages: [])
+                // get all page folders, iterate through
+                let pageDirs = try FileManager.default.contentsOfDirectory(at: bookDir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
+                for pageDir in pageDirs {
+                    // get page image and page transcript text
+                    
+                    // load image from file
+                    let imagePath = pageDir.appendingPathComponent("page.png")
+                    let imageData = NSData(contentsOf: imagePath)!
+                    let img = UIImage(data: imageData as Data)
+                    // Load text from file
+                    let txtPath = pageDir.appendingPathComponent("page.txt")
+                    let txt = try String(contentsOf: txtPath, encoding: .utf8)
+                    
+                    // Add new page to pages
+                    let page = PageData(dir: pageDir, img: img, txt: txt)
+                    book.pages.append(page)
+                }
+                // Add new book to books
+                loadBooks.append(book)
+            }
+        } catch let error{
+            print("error getting books: ", error)
+        }
+        
+        self.books = loadBooks
+    }
+}
+
 
 class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -63,7 +112,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         let w = (collectionView.bounds.size.width/2)
         let ratio = collectionView.bounds.size.height / collectionView.bounds.size.width
         // we have an offset here so cell is cutoff, making scrollability obvious
-        let h = (w * ratio) + 10
+        let h = (w * ratio) - 10
         return CGSize(width: w, height: h);
     }
     

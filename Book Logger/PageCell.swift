@@ -13,4 +13,12 @@ class PageCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 
     @IBOutlet weak var plusLabel: UILabel!
+    
+    // Variables only for edit view
+    var indexPath: IndexPath!
+    var editController: PagesEditController!
+    
+    @IBAction func deleteThisCell(_ sender: Any) {
+        editController.deleteCell(cell: self)
+    }
 }

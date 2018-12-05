@@ -18,6 +18,7 @@
 		04E853032161BC6F00F8C439 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E853022161BC6F00F8C439 /* Assets.xcassets */; };
 		04E853062161BC6F00F8C439 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E853042161BC6F00F8C439 /* LaunchScreen.storyboard */; };
 		04E8530E2161C8CB00F8C439 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */; };
+		384ECBEC21B84BF0006AF2EA /* PagesEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384ECBEB21B84BF0006AF2EA /* PagesEditController.swift */; };
 		495F823621B83CE400A63741 /* BooksEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F823521B83CE400A63741 /* BooksEditController.swift */; };
 		49FF7F99218D4AE900DC4604 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 49FF7F98218D4AE900DC4604 /* tessdata */; };
 		49FF7F9B218D4B7500DC4604 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF7F9A218D4B7500DC4604 /* libstdc++.tbd */; };
@@ -40,6 +41,7 @@
 		04E853052161BC6F00F8C439 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04E853072161BC6F00F8C439 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04E8530D2161C8CB00F8C439 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		384ECBEB21B84BF0006AF2EA /* PagesEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesEditController.swift; sourceTree = "<group>"; };
 		495F823521B83CE400A63741 /* BooksEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksEditController.swift; sourceTree = "<group>"; };
 		49FF7F98218D4AE900DC4604 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		49FF7F9A218D4B7500DC4604 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				495F823521B83CE400A63741 /* BooksEditController.swift */,
+				384ECBEB21B84BF0006AF2EA /* PagesEditController.swift */,
 				49FF7F98218D4AE900DC4604 /* tessdata */,
 				04E852FB2161BC6D00F8C439 /* AppDelegate.swift */,
 				04E852FD2161BC6D00F8C439 /* ViewController.swift */,
@@ -239,6 +242,7 @@
 			files = (
 				495F823621B83CE400A63741 /* BooksEditController.swift in Sources */,
 				04E8530E2161C8CB00F8C439 /* CollectionViewController.swift in Sources */,
+				384ECBEC21B84BF0006AF2EA /* PagesEditController.swift in Sources */,
 				04E852FE2161BC6D00F8C439 /* ViewController.swift in Sources */,
 				042C48C52175405C003F2C42 /* PagesController.swift in Sources */,
 				04AA9AAD2177A453004F2496 /* BookCell.swift in Sources */,

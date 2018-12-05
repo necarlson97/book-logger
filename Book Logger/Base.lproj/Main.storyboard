@@ -23,7 +23,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="&lt;"/>
                                 <connections>
-                                    <action selector="backToBooks:" destination="q3Q-pe-ZCX" eventType="touchUpInside" id="9Bx-We-6Yw"/>
+                                    <action selector="backToBooks:" destination="q3Q-pe-ZCX" eventType="touchUpInside" id="Fxl-5r-lzH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgC-s5-pDP">
@@ -86,10 +86,12 @@
                                     <outlet property="delegate" destination="q3Q-pe-ZCX" id="Dr7-TD-wYh"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaJ-iq-rtf">
-                                <rect key="frame" x="297" y="26" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaJ-iq-rtf">
+                                <rect key="frame" x="297" y="20" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <segue destination="WCE-2K-wW2" kind="show" identifier="toEditPages" id="H4r-PV-I8R"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,7 +105,9 @@
                             <constraint firstItem="kcb-ah-72a" firstAttribute="leading" secondItem="hS0-Pu-P9c" secondAttribute="leading" id="bxd-xt-buV"/>
                             <constraint firstItem="kcb-ah-72a" firstAttribute="trailing" secondItem="hS0-Pu-P9c" secondAttribute="trailing" id="d5S-Sw-Kmq"/>
                             <constraint firstItem="op5-7a-tAX" firstAttribute="leading" secondItem="hS0-Pu-P9c" secondAttribute="leading" constant="16" id="dVF-zc-tBg"/>
+                            <constraint firstItem="PaJ-iq-rtf" firstAttribute="top" secondItem="hS0-Pu-P9c" secondAttribute="top" id="ePE-VQ-wD9"/>
                             <constraint firstItem="jaF-2i-Dho" firstAttribute="centerX" secondItem="hS0-Pu-P9c" secondAttribute="centerX" id="hg9-YZ-r98"/>
+                            <constraint firstItem="hS0-Pu-P9c" firstAttribute="trailing" secondItem="PaJ-iq-rtf" secondAttribute="trailing" constant="16" id="if5-Am-aaT"/>
                             <constraint firstItem="wgC-s5-pDP" firstAttribute="centerX" secondItem="hS0-Pu-P9c" secondAttribute="centerX" id="ssN-eC-LBv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hS0-Pu-P9c"/>
@@ -265,12 +269,11 @@
                                     <outlet property="delegate" destination="C5X-lE-D3o" id="pDd-Gl-QXL"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRP-WC-u6e">
-                                <rect key="frame" x="297" y="26" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRP-WC-u6e">
+                                <rect key="frame" x="297" y="20" width="30" height="30"/>
                                 <state key="normal" title="Edit"/>
                                 <connections>
-                                    <segue destination="kPX-yi-HzW" kind="show" identifier="toEditBooks" animates="NO" id="Fki-AV-Ya0"/>
+                                    <segue destination="kPX-yi-HzW" kind="show" identifier="toEditBooks" id="Fki-AV-Ya0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -284,6 +287,8 @@
                             <constraint firstItem="ysh-F9-XUb" firstAttribute="trailing" secondItem="1Rm-ol-4dC" secondAttribute="trailing" id="emR-wt-Wti"/>
                             <constraint firstItem="w3P-mh-0xF" firstAttribute="top" secondItem="1Rm-ol-4dC" secondAttribute="top" id="g32-t1-d6n"/>
                             <constraint firstItem="ysh-F9-XUb" firstAttribute="leading" secondItem="1Rm-ol-4dC" secondAttribute="leading" id="m82-LO-EH5"/>
+                            <constraint firstItem="1Rm-ol-4dC" firstAttribute="trailing" secondItem="GRP-WC-u6e" secondAttribute="trailing" constant="16" id="rXG-OP-Qon"/>
+                            <constraint firstItem="GRP-WC-u6e" firstAttribute="top" secondItem="1Rm-ol-4dC" secondAttribute="top" id="uRf-Fo-7Zd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Rm-ol-4dC"/>
                     </view>
@@ -305,8 +310,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="343" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okU-32-4t7">
-                                <rect key="frame" x="132" y="20" width="80" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okU-32-4t7">
+                                <rect key="frame" x="103" y="20" width="137" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -368,12 +373,11 @@
                                     <outlet property="delegate" destination="kPX-yi-HzW" id="Ie0-2u-BuJ"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLG-PE-n7q">
-                                <rect key="frame" x="294" y="26" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLG-PE-n7q">
+                                <rect key="frame" x="290" y="20" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <segue destination="C5X-lE-D3o" kind="show" animates="NO" id="9dS-Vj-EFh"/>
+                                    <action selector="backToBooks:" destination="kPX-yi-HzW" eventType="touchUpInside" id="0kt-ye-9T3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -383,7 +387,9 @@
                             <constraint firstItem="BJd-Pf-MDe" firstAttribute="trailing" secondItem="d7S-FK-RhM" secondAttribute="trailing" id="6uZ-Dq-vcc"/>
                             <constraint firstItem="BJd-Pf-MDe" firstAttribute="leading" secondItem="d7S-FK-RhM" secondAttribute="leading" id="Abb-Ay-TNF"/>
                             <constraint firstItem="okU-32-4t7" firstAttribute="centerX" secondItem="d7S-FK-RhM" secondAttribute="centerX" id="apL-ZU-1cC"/>
+                            <constraint firstItem="xLG-PE-n7q" firstAttribute="top" secondItem="d7S-FK-RhM" secondAttribute="top" id="e9G-yp-27c"/>
                             <constraint firstItem="d7S-FK-RhM" firstAttribute="bottom" secondItem="BJd-Pf-MDe" secondAttribute="bottom" constant="20" id="iSB-fB-BKh"/>
+                            <constraint firstItem="d7S-FK-RhM" firstAttribute="trailing" secondItem="xLG-PE-n7q" secondAttribute="trailing" constant="16" id="n2d-id-dgH"/>
                             <constraint firstItem="okU-32-4t7" firstAttribute="top" secondItem="d7S-FK-RhM" secondAttribute="top" id="oQj-o3-COO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d7S-FK-RhM"/>
@@ -396,6 +402,97 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x8N-WS-5pd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-132" y="53"/>
+        </scene>
+        <!--PagesEdit Controller-->
+        <scene sceneID="jOu-pg-Gcp">
+            <objects>
+                <viewController id="WCE-2K-wW2" userLabel="PagesEdit Controller" customClass="PagesEditController" customModule="Book_Logger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kta-kM-qLh">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Pages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9F-Vn-HDD">
+                                <rect key="frame" x="103.5" y="20" width="136" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6Rq-G7-s6e">
+                                <rect key="frame" x="0.0" y="102" width="343" height="478"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zew-Bf-AQ5">
+                                    <size key="itemSize" width="136" height="193"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pageCell" id="nM5-Yc-LEU" customClass="PageCell" customModule="Book_Logger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="136" height="193"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="193"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Igf-HI-pCL">
+                                                    <rect key="frame" x="10" y="10" width="116" height="173"/>
+                                                    <color key="backgroundColor" red="0.95628238340000005" green="0.95628238340000005" blue="0.95628238340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JO3-1L-zsn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Delete"/>
+                                                    <connections>
+                                                        <action selector="deleteThisCell:" destination="nM5-Yc-LEU" eventType="touchUpInside" id="vJe-Sg-esX"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Igf-HI-pCL" secondAttribute="bottom" constant="10" id="63Z-oN-Ws1"/>
+                                            <constraint firstAttribute="trailing" secondItem="Igf-HI-pCL" secondAttribute="trailing" constant="10" id="Cbq-tL-mCh"/>
+                                            <constraint firstItem="Igf-HI-pCL" firstAttribute="leading" secondItem="nM5-Yc-LEU" secondAttribute="leading" constant="10" id="jwc-MH-MZT"/>
+                                            <constraint firstItem="Igf-HI-pCL" firstAttribute="top" secondItem="nM5-Yc-LEU" secondAttribute="top" constant="10" id="wcn-pk-bUF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="Igf-HI-pCL" id="0OC-r1-eII"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="WCE-2K-wW2" id="uvA-W9-HAT"/>
+                                    <outlet property="delegate" destination="WCE-2K-wW2" id="F5Q-78-1j6"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJC-cv-5YQ">
+                                <rect key="frame" x="290" y="20" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="backToPagess:" destination="WCE-2K-wW2" eventType="touchUpInside" id="h5h-ED-of6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nJC-cv-5YQ" firstAttribute="top" secondItem="X9T-dz-pmW" secondAttribute="top" id="0US-FC-3p5"/>
+                            <constraint firstItem="X9T-dz-pmW" firstAttribute="bottom" secondItem="6Rq-G7-s6e" secondAttribute="bottom" constant="20" id="Adu-4Q-GM0"/>
+                            <constraint firstItem="i9F-Vn-HDD" firstAttribute="top" secondItem="X9T-dz-pmW" secondAttribute="top" id="Ay7-k7-FHv"/>
+                            <constraint firstItem="6Rq-G7-s6e" firstAttribute="trailing" secondItem="X9T-dz-pmW" secondAttribute="trailing" id="Dnw-6b-51K"/>
+                            <constraint firstItem="i9F-Vn-HDD" firstAttribute="centerX" secondItem="X9T-dz-pmW" secondAttribute="centerX" id="aW1-pJ-GXG"/>
+                            <constraint firstItem="X9T-dz-pmW" firstAttribute="trailing" secondItem="nJC-cv-5YQ" secondAttribute="trailing" constant="16" id="bO8-AA-1NK"/>
+                            <constraint firstItem="6Rq-G7-s6e" firstAttribute="leading" secondItem="X9T-dz-pmW" secondAttribute="leading" id="h34-2W-34h"/>
+                            <constraint firstItem="6Rq-G7-s6e" firstAttribute="top" secondItem="i9F-Vn-HDD" secondAttribute="bottom" constant="46" id="kmC-81-D1Y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="X9T-dz-pmW"/>
+                    </view>
+                    <size key="freeformSize" width="343" height="600"/>
+                    <connections>
+                        <outlet property="collectionView" destination="6Rq-G7-s6e" id="kG9-k6-fJx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LMe-PS-EVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="944.79999999999995" y="51.27436281859071"/>
         </scene>
     </scenes>
 </document>
