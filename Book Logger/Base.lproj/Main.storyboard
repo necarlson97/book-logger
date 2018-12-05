@@ -341,9 +341,9 @@
                                                     <rect key="frame" x="5" y="5" width="111" height="168"/>
                                                     <color key="backgroundColor" red="0.97366823189999996" green="0.97366823189999996" blue="0.97366823189999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tev-Ar-MYj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
-                                                    <state key="normal" title="Delete"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tev-Ar-MYj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                    <state key="normal" image="delete-icon-32"/>
                                                     <connections>
                                                         <action selector="deleteThisCell:" destination="3LC-U4-C4M" eventType="touchUpInside" id="osl-TJ-SLo"/>
                                                     </connections>
@@ -438,10 +438,10 @@
                                                     <rect key="frame" x="10" y="10" width="116" height="173"/>
                                                     <color key="backgroundColor" red="0.95628238340000005" green="0.95628238340000005" blue="0.95628238340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JO3-1L-zsn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JO3-1L-zsn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Delete"/>
+                                                    <state key="normal" image="delete-icon-32"/>
                                                     <connections>
                                                         <action selector="deleteThisCell:" destination="nM5-Yc-LEU" eventType="touchUpInside" id="vJe-Sg-esX"/>
                                                     </connections>
@@ -495,4 +495,7 @@
             <point key="canvasLocation" x="944.79999999999995" y="51.27436281859071"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="delete-icon-32" width="32" height="32"/>
+    </resources>
 </document>
