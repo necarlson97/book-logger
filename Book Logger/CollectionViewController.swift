@@ -63,7 +63,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate, UICo
         let w = (collectionView.bounds.size.width/2)
         let ratio = collectionView.bounds.size.height / collectionView.bounds.size.width
         // we have an offset here so cell is cutoff, making scrollability obvious
-        let h = (w * ratio) - 10
+        let h = (w * ratio) + 10
         return CGSize(width: w, height: h);
     }
     

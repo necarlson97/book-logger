@@ -15,5 +15,15 @@ class BookCell: UICollectionViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
     
     @IBOutlet weak var plusLabel: UILabel!
+  
+    // Variables only for edit view
+    var indexPath: IndexPath!
+    var editController: BooksEditController!
     
+    @IBAction func deleteThisCell(_ sender: Any) {
+      print("sender", sender)
+      print("my index", indexPath.row)
+      editController.books.remove(at: indexPath.row)
+      editController.collectionView.deleteItems(at: [indexPath])
+    }
 }

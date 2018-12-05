@@ -88,6 +88,10 @@ class BooksController: CollectionViewController {
     func sequeToBook(book: BookData) {
         performSegue(withIdentifier: "toPages", sender: book)
     }
+  
+    func sequeToEditBooks(book: BookData) {
+        performSegue(withIdentifier: "toEditBooks", sender: book)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Before we move to a PagesViewController, set the correct BookData (using sender)
@@ -95,7 +99,10 @@ class BooksController: CollectionViewController {
             let pagesVC = segue.destination as! PagesController
             let book = sender as! BookData
             pagesVC.book = book
-        }
+        } else if segue.identifier == "toEditBooks" {
+          let editVC = segue.destination as! BooksEditController
+          editVC.books = self.books
+      }
     }
     
     func getBooks() -> [BookData] {
