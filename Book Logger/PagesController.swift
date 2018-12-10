@@ -1,22 +1,49 @@
 import UIKit
 
-class PagesController: CollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PagesController: CollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var currentImage = UIImage(named: "no-image")
     let imagePicker = UIImagePickerController()
     
     var book: BookData!
+
+    var filteredPages: [PageData] = []
+    var searchIsActive: Bool = false
+    let searchController = UISearchController(searchResultsController: nil)
+    let searchBarHeight: Int = 50
     
     override func viewDidLoad() {
-        imagePicker.delegate = self
+      imagePicker.delegate = self
+      
+      searchController.searchResultsUpdater = self
+      searchController.searchBar.delegate = self
+      searchController.hidesNavigationBarDuringPresentation = false
+      searchController.dimsBackgroundDuringPresentation = true
+      searchController.obscuresBackgroundDuringPresentation = false
+      searchController.searchBar.placeholder = "Search for pages by text..."
+      searchController.searchBar.sizeToFit()
+      searchController.searchBar.searchBarStyle = .minimal
+      searchController.searchBar.becomeFirstResponder()
+      
+      self.navigationItem.titleView = searchController.searchBar
+      definesPresentationContext = true
+      collectionView.addSubview(searchController.searchBar)
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         collectionView.reloadData()
     }
-    
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    return CGSize(width: view.bounds.width, height: CGFloat(searchBarHeight))
+  }
+  
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isFiltering(){
+          return filteredPages.count
+        }
         return book.pages.count + 1
     }
     
@@ -26,15 +53,22 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
         
         cell.imageView.layer.borderWidth = 1
         cell.imageView.layer.borderColor = UIColor.lightGray.cgColor
-        
+      
+      
         // Index 0 is used for 'new page'
         if indexPath.row > 0 {
+          let page: PageData
+          if isFiltering() {
+            page = filteredPages[indexPath.row-1]
+          } else {
+            page = book.pages[indexPath.row-1]
+          }
             // No '+' on the button
             cell.plusLabel.text = ""
             
             // load image from current pages
-            cell.imageView.image = book.pages[indexPath.row-1].img
-        } else {
+            cell.imageView.image = page.img
+          } else {
             // This cell is for 'new page'
             cell.plusLabel.text = "+"
             cell.imageView.image = nil
@@ -178,4 +212,33 @@ class PagesController: CollectionViewController, UIImagePickerControllerDelegate
     @IBAction func backToBooks(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+  
+  // MARK: - Search bar
+    func isFiltering() -> Bool {
+      return searchController.isActive && !searchBarIsEmpty()
+    }
+
+  
+  // MARK: - Private instance methods
+  
+  func searchBarIsEmpty() -> Bool {
+    // Returns true if the text is empty or nil
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+  
+  func filterContentForSearchText(_ searchText: String, scope: String = "") {
+    filteredPages = book.pages.filter({( page : PageData) -> Bool in
+      return page.txt.lowercased().contains(searchText.lowercased())
+    })
+    collectionView.reloadData()
+  }
+
 }
+
+extension PagesController: UISearchResultsUpdating {
+  // MARK: - UISearchResultsUpdating Delegate
+  func updateSearchResults(for searchController: UISearchController) {
+    filterContentForSearchText(searchController.searchBar.text!)
+  }
+}
+

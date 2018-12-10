@@ -32,15 +32,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search pages..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jaF-2i-Dho">
-                                <rect key="frame" x="111.5" y="64" width="120" height="30"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kcb-ah-72a">
-                                <rect key="frame" x="0.0" y="102" width="343" height="478"/>
+                                <rect key="frame" x="0.0" y="92" width="343" height="488"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="488" id="HYO-mh-Qoc"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4P3-Hc-EnC">
                                     <size key="itemSize" width="135" height="193"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -60,7 +57,7 @@
                                                     <color key="backgroundColor" red="0.95628238340000005" green="0.95628238340000005" blue="0.95628238340000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2S-S4-8A9">
-                                                    <rect key="frame" x="52" y="66.5" width="31" height="60"/>
+                                                    <rect key="frame" x="52" y="67" width="31" height="60"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                     <color key="textColor" red="0.070588235289999995" green="0.41568627450000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -98,15 +95,13 @@
                         <constraints>
                             <constraint firstItem="hS0-Pu-P9c" firstAttribute="bottom" secondItem="kcb-ah-72a" secondAttribute="bottom" constant="20" id="04f-lP-1Hf"/>
                             <constraint firstItem="hS0-Pu-P9c" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wgC-s5-pDP" secondAttribute="trailing" symbolic="YES" id="54d-Eq-v7h"/>
-                            <constraint firstItem="jaF-2i-Dho" firstAttribute="top" secondItem="wgC-s5-pDP" secondAttribute="bottom" constant="8" id="Ad9-aX-hx1"/>
+                            <constraint firstItem="kcb-ah-72a" firstAttribute="top" secondItem="op5-7a-tAX" secondAttribute="bottom" constant="36" id="CsH-H5-WXM"/>
                             <constraint firstItem="op5-7a-tAX" firstAttribute="top" secondItem="hS0-Pu-P9c" secondAttribute="top" id="EI7-bk-vpX"/>
-                            <constraint firstItem="kcb-ah-72a" firstAttribute="top" secondItem="jaF-2i-Dho" secondAttribute="bottom" constant="8" id="H28-Sj-F2h"/>
                             <constraint firstItem="wgC-s5-pDP" firstAttribute="top" secondItem="hS0-Pu-P9c" secondAttribute="top" id="N9Y-L5-SEZ"/>
                             <constraint firstItem="kcb-ah-72a" firstAttribute="leading" secondItem="hS0-Pu-P9c" secondAttribute="leading" id="bxd-xt-buV"/>
                             <constraint firstItem="kcb-ah-72a" firstAttribute="trailing" secondItem="hS0-Pu-P9c" secondAttribute="trailing" id="d5S-Sw-Kmq"/>
                             <constraint firstItem="op5-7a-tAX" firstAttribute="leading" secondItem="hS0-Pu-P9c" secondAttribute="leading" constant="16" id="dVF-zc-tBg"/>
                             <constraint firstItem="PaJ-iq-rtf" firstAttribute="top" secondItem="hS0-Pu-P9c" secondAttribute="top" id="ePE-VQ-wD9"/>
-                            <constraint firstItem="jaF-2i-Dho" firstAttribute="centerX" secondItem="hS0-Pu-P9c" secondAttribute="centerX" id="hg9-YZ-r98"/>
                             <constraint firstItem="hS0-Pu-P9c" firstAttribute="trailing" secondItem="PaJ-iq-rtf" secondAttribute="trailing" constant="16" id="if5-Am-aaT"/>
                             <constraint firstItem="wgC-s5-pDP" firstAttribute="centerX" secondItem="hS0-Pu-P9c" secondAttribute="centerX" id="ssN-eC-LBv"/>
                         </constraints>
