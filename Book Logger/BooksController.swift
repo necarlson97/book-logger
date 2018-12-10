@@ -2,13 +2,11 @@ import UIKit
 
 class BooksController: CollectionViewController {
     
-    var books:[BookData]!
+    var library:LibraryData!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    
     override func viewDidLoad() {
-       books = getBooks()
+        library = LibraryData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -16,7 +14,7 @@ class BooksController: CollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count + 1
+        return library.books.count + 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -28,8 +26,8 @@ class BooksController: CollectionViewController {
             cell.plusLabel.text = ""
             
             // load image from current books
-            let book = books[indexPath.row-1]
-
+            let book = library.books[indexPath.row-1]
+            
             // Set front image to first page
             if book.pages.count > 0 {
                 cell.bookImageView.image = book.pages[0].img
@@ -62,7 +60,7 @@ class BooksController: CollectionViewController {
         // Index 0 is used for 'new book'
         if indexPath.row > 0 {
             // go to existing book
-            let book = books[indexPath.row-1]
+            let book = library.books[indexPath.row-1]
             sequeToBook(book: book)
         } else {
             // create new book, then segue there
@@ -73,7 +71,7 @@ class BooksController: CollectionViewController {
     func sequeToNewBook() {
         // create new book directory
         let unixTime = NSDate().timeIntervalSince1970
-        let bookDir = docDir.appendingPathComponent("book\(unixTime)")
+        let bookDir = library.dir.appendingPathComponent("book\(unixTime)")
         do {
             try FileManager.default.createDirectory(atPath: (bookDir.path), withIntermediateDirectories: true, attributes: nil)
         } catch let error as NSError {
@@ -81,12 +79,16 @@ class BooksController: CollectionViewController {
         }
         
         let book = BookData(dir: bookDir, pages:[])
-        books.append(book)
+        library.books.append(book)
         performSegue(withIdentifier: "toPages", sender: book)
     }
     
     func sequeToBook(book: BookData) {
         performSegue(withIdentifier: "toPages", sender: book)
+    }
+    
+    func sequeToEditBooks() {
+        performSegue(withIdentifier: "toEditBooks", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -95,43 +97,12 @@ class BooksController: CollectionViewController {
             let pagesVC = segue.destination as! PagesController
             let book = sender as! BookData
             pagesVC.book = book
+        } else if segue.identifier == "toEditBooks" {
+            let editVC = segue.destination as! BooksEditController
+            editVC.library = self.library
         }
     }
     
-    func getBooks() -> [BookData] {
-        var loadBooks:[BookData] = []
-        
-        do {
-            // Get all book folders, iterate through
-            let bookDirs = try FileManager.default.contentsOfDirectory(at: docDir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
-            for bookDir in bookDirs {
-                // create a new book with empty pages
-                let book:BookData = BookData(dir: bookDir, pages: [])
-                // get all page folders, iterate through
-                let pageDirs = try FileManager.default.contentsOfDirectory(at: bookDir, includingPropertiesForKeys: nil).filter({ $0.hasDirectoryPath })
-                for pageDir in pageDirs {
-                    // get page image and page transcript text
-                    
-                    // load image from file
-                    let imagePath = pageDir.appendingPathComponent("page.png")
-                    let imageData = NSData(contentsOf: imagePath)!
-                    let img = UIImage(data: imageData as Data)
-                    // Load text from file
-                    let txtPath = pageDir.appendingPathComponent("page.txt")
-                    let txt = try String(contentsOf: txtPath, encoding: .utf8)
-                    
-                    // Add new page to pages
-                    let page = PageData(dir: pageDir, img: img, txt: txt)
-                    book.pages.append(page)
-                }
-                // Add new book to books
-                loadBooks.append(book)
-            }
-        } catch let error{
-            print("error getting books: ", error)
-        }
-        return loadBooks
-        
-    }
+    
     
 }
